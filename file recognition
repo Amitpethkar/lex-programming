@@ -1,0 +1,40 @@
+%{
+   #include<stdio.h>
+   #include<stdlib.h>
+   int sportword=0,wordcount=0,linecount=0,total=0;
+%}
+ 
+%%
+
+Education|learning|knowledge|development|skills|intellectual|growth|aims|academic|practical|research|institutions|teachers|professors|trainers|activities|students|unemployment|career|self-confidence|candidate|tool|smartest|incomplete|essay|success|self-sufficient|better|School|college|speech|topics|inform|educate|written|Essays|Speeches|Topics|Primary|High|Students|Education|problems|solution|Institutions|pdf|Ukg|1|2|3|4|5|6|7|8|9|10th|discuss|meaning|Science|Geography|history|english|maths|subject|taught|standard|employment|understanding{sportword=sportword+1;printf("%s",yytext);}
+[" "]		{wordcount=wordcount+1; printf("%s", yytext);}
+[\n]		{linecount=linecount+1;printf("%s", yytext);}
+
+%%
+int yywrap()
+{
+  return 1;
+}
+int main()
+{
+  yyin=fopen("sport.txt","r");
+  yylex();
+  printf("\n");
+
+printf("\t* * * * * * * * * * * * * * * * * * * * * * * * * * * *\n");
+
+	total=wordcount+linecount;
+   
+      if((sportword)>=total*10/100)
+      {
+      printf("\nGiven document is related to Sports!\n");
+      }
+	else
+      {
+        printf("\nTotal no. of words in given document are not enough to detect the type of document\n");
+      }
+      
+  
+     
+  yywrap();
+}
